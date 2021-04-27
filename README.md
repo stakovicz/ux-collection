@@ -38,12 +38,16 @@ class BlogFormType extends AbstractType
             ->add('comments', UXCollectionType::class, [
                 // ...
                 'button_add' => [
-                    'text' => 'Add',    // Default text for the button add
-                    'attr' => ['class' => 'btn btn-outline-primary']    // Default class for the button add
+                     // Default text for the add button
+                    'text' => 'Add',    
+                    // Default attr class for the add button
+                    'attr' => ['class' => 'btn btn-outline-primary'] 
                 ],
                 'button_delete' => [
-                    'text' => 'Remove',    // Default text for the button add
-                    'attr' => ['class' => 'btn btn-outline-secondary']    // Default class for the button remove
+                    // Default text for the delete button
+                    'text' => 'Remove',    
+                    // Default class for the delete button
+                    'attr' => ['class' => 'btn btn-outline-secondary']    
                 ],
             ])
             // ...
