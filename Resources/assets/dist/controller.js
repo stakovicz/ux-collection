@@ -64,7 +64,6 @@ var _default = /*#__PURE__*/function (_Controller) {
         var buttonAdd = this._textToNode('<button data-action="' + this.controllerName + '#add"' + ' class="' + this.buttonAddClassValue + '" type="button">' + this.buttonAddTextValue + '</button>');
 
         this.containerTarget.prepend(buttonAdd);
-        console.log(buttonAdd);
       } // Add buttons Delete
 
 

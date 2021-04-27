@@ -38,7 +38,6 @@ export default class extends Controller {
                 + ' class="' + this.buttonAddClassValue + '" type="button">'
                 + this.buttonAddTextValue + '</button>');
             this.containerTarget.prepend(buttonAdd);
-            console.log(buttonAdd);
         }
 
         // Add buttons Delete
