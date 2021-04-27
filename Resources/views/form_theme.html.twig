@@ -1,0 +1,35 @@
+
+{% block ux_collection_widget -%}
+    {%- set dataController = (attr['data-controller']|default('') ~ ' stakovicz--ux-collection--collection')|trim -%}
+    {# attr for the data target on the entry of the collection #}
+    {%- set attrDataTarget = {('data-'~dataController~'-target'): 'entry' } -%}
+
+    <div {{ stimulus_controller(dataController, {
+            'allow-add': allow_add,
+            'allow-delete': allow_delete,
+            'button-add-class': button_add.attr.class,
+            'button-add-text': button_add.text|trans,
+            'button-delete-class': button_delete.attr.class,
+            'button-delete-text': button_delete.text|trans,
+        }) }}>
+        {% if prototype is defined and not prototype.rendered %}
+            {%- set prototype_attr = prototype.vars.attr|merge(attrDataTarget) -%}
+            {%- set attr = attr|merge({'data-prototype': form_row(prototype, {'row_attr': prototype_attr}) }) -%}
+        {% endif %}
+        {%- set attr = attr|merge({('data-'~dataController~'-target'): 'container' }) -%}
+
+        <div {{ block('widget_container_attributes') }}>
+            {%- if form is rootform -%}
+                {{ form_errors(form) }}
+            {%- endif -%}
+
+            {% for child in form|filter(child => not child.rendered) %}
+
+                {%- set child_attr = child.vars.attr|merge(attrDataTarget) -%}
+                {{- form_row(child, {'row_attr': child_attr}) -}}
+
+            {% endfor %}
+            {{- form_rest(form) -}}
+        </div>
+    </div>
+{%- endblock %}
