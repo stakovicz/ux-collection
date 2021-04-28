@@ -1,22 +1,23 @@
 
 {% block ux_collection_widget -%}
-    {%- set dataController = (attr['data-controller']|default('') ~ ' stakovicz--ux-collection--collection')|trim -%}
+    {%- set controllerName = 'stakovicz--ux-collection--collection' -%}
+    {%- set dataController = (attr['data-controller']|default('') ~ ' ' ~ controllerName)|trim -%}
     {# attr for the data target on the entry of the collection #}
-    {%- set attrDataTarget = {('data-'~dataController~'-target'): 'entry' } -%}
+    {%- set attrDataTarget = {('data-'~controllerName~'-target'): 'entry' } -%}
 
-    <div {{ stimulus_controller(dataController, {
-            'allow-add': allow_add,
-            'allow-delete': allow_delete,
-            'button-add-class': button_add.attr.class,
-            'button-add-text': button_add.text|trans,
-            'button-delete-class': button_delete.attr.class,
-            'button-delete-text': button_delete.text|trans,
-        }) }}>
+    <div data-controller="{{ dataController }}"
+        data-{{ controllerName }}-allow-add-value="{{ allow_add }}"
+        data-{{ controllerName }}-allow-delete-value="{{ allow_delete }}"
+        data-{{ controllerName }}-button-add-class-value="{{ button_add.attr.class }}"
+        data-{{ controllerName }}-button-add-text-value="{{ button_add.text|trans }}"
+        data-{{ controllerName }}-button-delete-class-value="{{ button_delete.attr.class }}"
+        data-{{ controllerName }}-button-delete-text-value="{{ button_delete.text|trans }}"
+    >
         {% if prototype is defined and not prototype.rendered %}
             {%- set prototype_attr = prototype.vars.attr|merge(attrDataTarget) -%}
             {%- set attr = attr|merge({'data-prototype': form_row(prototype, {'row_attr': prototype_attr}) }) -%}
         {% endif %}
-        {%- set attr = attr|merge({('data-'~dataController~'-target'): 'container' }) -%}
+        {%- set attr = attr|merge({('data-'~controllerName~'-target'): 'container' }) -%}
 
         <div {{ block('widget_container_attributes') }}>
             {%- if form is rootform -%}
