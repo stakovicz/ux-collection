@@ -59,6 +59,11 @@ var _default = /*#__PURE__*/function (_Controller) {
     value: function connect() {
       this.controllerName = this.context.scope.identifier;
 
+      this._dispatchEvent('collection:pre-connect', {
+        allowAdd: this.allowAddValue,
+        allowDelete: this.allowDeleteValue
+      });
+
       if (true === this.allowAddValue) {
         // Add button Add
         var buttonAdd = this._textToNode('<button data-action="' + this.controllerName + '#add"' + ' class="' + this.buttonAddClassValue + '" type="button">' + this.buttonAddTextValue + '</button>');
@@ -67,7 +72,7 @@ var _default = /*#__PURE__*/function (_Controller) {
       } // Add buttons Delete
 
 
-      if (true === this.allowDelete) {
+      if (true === this.allowDeleteValue) {
         for (var i = 0; i < this.entryTargets.length; i++) {
           this.index = i;
           var entry = this.entryTargets[i];
@@ -75,6 +80,11 @@ var _default = /*#__PURE__*/function (_Controller) {
           this._addDeleteButton(entry, this.index);
         }
       }
+
+      this._dispatchEvent('collection:connect', {
+        allowAdd: this.allowAddValue,
+        allowDelete: this.allowDeleteValue
+      });
     }
   }, {
     key: "add",
@@ -86,6 +96,12 @@ var _default = /*#__PURE__*/function (_Controller) {
       newEntry = newEntry.replace(/__name__/g, this.index);
       newEntry = this._textToNode(newEntry);
       newEntry = this._addDeleteButton(newEntry, this.index);
+
+      this._dispatchEvent('collection:pre-add', {
+        index: this.index,
+        element: newEntry
+      });
+
       this.containerTarget.append(newEntry);
     }
   }, {
@@ -97,7 +113,17 @@ var _default = /*#__PURE__*/function (_Controller) {
         var entry = this.entryTargets[i];
 
         if (theIndexEntryToDelete === entry.dataset.indexEntry) {
+          this._dispatchEvent('collection:pre-delete', {
+            index: entry.dataset.indexEntry,
+            element: entry
+          });
+
           entry.remove();
+
+          this._dispatchEvent('collection:delete', {
+            index: entry.dataset.indexEntry,
+            element: entry
+          });
         }
       }
     }
@@ -133,6 +159,16 @@ var _default = /*#__PURE__*/function (_Controller) {
       var div = document.createElement('div');
       div.innerHTML = text.trim();
       return div.firstChild;
+    }
+  }, {
+    key: "_dispatchEvent",
+    value: function _dispatchEvent(name) {
+      var payload = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+      var canBubble = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+      var cancelable = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
+      var userEvent = document.createEvent('CustomEvent');
+      userEvent.initCustomEvent(name, canBubble, cancelable, payload);
+      this.element.dispatchEvent(userEvent);
     }
   }]);
 

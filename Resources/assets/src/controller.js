@@ -1,6 +1,6 @@
 'use strict';
 
-import {Controller} from 'stimulus';
+import { Controller } from 'stimulus';
 
 export default class extends Controller {
     static targets = [
@@ -30,7 +30,13 @@ export default class extends Controller {
     controllerName = null;
 
     connect() {
+
         this.controllerName = this.context.scope.identifier;
+
+        this._dispatchEvent('collection:pre-connect', {
+            allowAdd: this.allowAddValue,
+            allowDelete: this.allowDeleteValue,
+        });
 
         if (true === this.allowAddValue) {
             // Add button Add
@@ -41,7 +47,7 @@ export default class extends Controller {
         }
 
         // Add buttons Delete
-        if (true === this.allowDelete) {
+        if (true === this.allowDeleteValue) {
             for (let i = 0; i < this.entryTargets.length; i++) {
                 this.index = i;
                 let entry = this.entryTargets[i];
@@ -49,6 +55,10 @@ export default class extends Controller {
             }
         }
 
+        this._dispatchEvent('collection:connect', {
+            allowAdd: this.allowAddValue,
+            allowDelete: this.allowDeleteValue,
+        });
     }
 
     add(event) {
@@ -63,6 +73,11 @@ export default class extends Controller {
         newEntry = this._textToNode(newEntry);
         newEntry = this._addDeleteButton(newEntry, this.index);
 
+        this._dispatchEvent('collection:pre-add', {
+            index: this.index,
+            element: newEntry
+        });
+
         this.containerTarget.append(newEntry);
     }
 
@@ -74,7 +89,18 @@ export default class extends Controller {
         for (let i = 0; i < this.entryTargets.length; i++) {
             let entry = this.entryTargets[i];
             if (theIndexEntryToDelete === entry.dataset.indexEntry) {
+
+                this._dispatchEvent('collection:pre-delete', {
+                    index: entry.dataset.indexEntry,
+                    element: entry
+                });
+
                 entry.remove();
+
+                this._dispatchEvent('collection:delete', {
+                    index: entry.dataset.indexEntry,
+                    element: entry
+                });
             }
         }
     }
@@ -107,9 +133,16 @@ export default class extends Controller {
      */
     _textToNode(text) {
 
-        var div = document.createElement('div');
+        let div = document.createElement('div');
         div.innerHTML = text.trim();
 
         return div.firstChild;
+    }
+
+    _dispatchEvent(name, payload = null, canBubble = false, cancelable = false) {
+        const userEvent = document.createEvent('CustomEvent');
+        userEvent.initCustomEvent(name, canBubble, cancelable, payload);
+
+        this.element.dispatchEvent(userEvent);
     }
 }
