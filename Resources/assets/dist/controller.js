@@ -66,7 +66,7 @@ var _default = /*#__PURE__*/function (_Controller) {
 
       if (true === this.allowAddValue) {
         // Add button Add
-        var buttonAdd = this._textToNode('<button data-action="' + this.controllerName + '#add"' + ' class="' + this.buttonAddClassValue + '" type="button">' + this.buttonAddTextValue + '</button>');
+        var buttonAdd = this._textToNode(this.buttonAddValue);
 
         this.containerTarget.prepend(buttonAdd);
       } // Add buttons Delete
@@ -141,8 +141,9 @@ var _default = /*#__PURE__*/function (_Controller) {
       // link the button and the entry by the data-index-entry attribute
       entry.dataset.indexEntry = index;
 
-      var buttonDelete = this._textToNode('<button data-action="' + this.controllerName + '#delete"' + ' data-index-entry="' + index + '" class="' + this.buttonDeleteClassValue + '" type="button">' + this.buttonDeleteTextValue + '</button>');
+      var buttonDelete = this._textToNode(this.buttonDeleteValue);
 
+      buttonDelete.dataset.indexEntry = index;
       entry.append(buttonDelete);
       return entry;
     }
@@ -182,8 +183,6 @@ _defineProperty(_default, "targets", ['container', 'entry']);
 _defineProperty(_default, "values", {
   allowAdd: Boolean,
   allowDelete: Boolean,
-  buttonAddClass: String,
-  buttonAddText: String,
-  buttonDeleteClass: String,
-  buttonDeleteText: String
+  buttonAdd: String,
+  buttonDelete: String
 });

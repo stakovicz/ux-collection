@@ -11,10 +11,8 @@ export default class extends Controller {
     static values = {
         allowAdd: Boolean,
         allowDelete: Boolean,
-        buttonAddClass: String,
-        buttonAddText: String,
-        buttonDeleteClass: String,
-        buttonDeleteText: String,
+        buttonAdd: String,
+        buttonDelete: String
     };
 
     /**
@@ -40,9 +38,7 @@ export default class extends Controller {
 
         if (true === this.allowAddValue) {
             // Add button Add
-            let buttonAdd = this._textToNode('<button data-action="' + this.controllerName + '#add"'
-                + ' class="' + this.buttonAddClassValue + '" type="button">'
-                + this.buttonAddTextValue + '</button>');
+            let buttonAdd = this._textToNode(this.buttonAddValue);
             this.containerTarget.prepend(buttonAdd);
         }
 
@@ -117,9 +113,8 @@ export default class extends Controller {
         // link the button and the entry by the data-index-entry attribute
         entry.dataset.indexEntry = index;
 
-        let buttonDelete = this._textToNode('<button data-action="' + this.controllerName + '#delete"'
-            + ' data-index-entry="' + index + '" class="' + this.buttonDeleteClassValue + '" type="button">'
-            + this.buttonDeleteTextValue + '</button>');
+        let buttonDelete = this._textToNode(this.buttonDeleteValue);
+        buttonDelete.dataset.indexEntry = index;
         entry.append(buttonDelete);
 
         return entry;
