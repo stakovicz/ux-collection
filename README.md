@@ -20,6 +20,19 @@ yarn encore dev
 Also make sure you have at least version 2.0 of [@symfony/stimulus-bridge](https://github.com/symfony/stimulus-bridge)
 in your `package.json` file.
 
+You need to select the right theme from the one you are using :
+```yaml
+# config/packages/twig.yaml
+twig:
+  # For bootstrap for example
+  form_themes: ['@UXCollection/form_theme_div.html.twig']
+```
+You have 2 different themes :
+- `@UXCollection/form_theme_div.html.twig`
+- `@UXCollection/form_theme_table.html.twig`
+
+[Check the Symfony doc](https://symfony.com/doc/4.4/form/form_themes.html) for the different ways to set themes in Symfony.
+
 ## Usage
 
 The most common usage of Form Collection is to use it as a replacement of

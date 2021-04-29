@@ -1,8 +1,12 @@
 {%- block button_add -%}
     {%- set attrDataAction = (attr['data-action']|default('') ~ ' ' ~ controllerName ~ '#delete')|trim -%}
 
-    <button data-action="{{ controllerName }}#add"
-            class="{{ button_add.attr.class }}"  type="button">{{ button_add.text|trans }}</button>
+    <tr>
+        <td colspan="2">
+        <button data-action="{{ controllerName }}#add"
+                class="{{ button_add.attr.class }}"  type="button">{{ button_add.text|trans }}</button>
+        </td>
+    </tr>
 {%- endblock button_add -%}
 
 {%- block button_delete -%}
@@ -32,7 +36,7 @@
         {% endif %}
         {%- set attr = attr|merge({('data-'~controllerName~'-target'): 'container' }) -%}
 
-        <div {{ block('widget_container_attributes') }}>
+        <table {{ block('widget_container_attributes') }}>
             {%- if form is rootform -%}
                 {{ form_errors(form) }}
             {%- endif -%}
@@ -43,7 +47,7 @@
                 {{- form_row(child, {'row_attr': child_attr}) -}}
 
             {% endfor %}
-            {{- form_rest(form) -}}
-        </div>
+        </table>
+        {{- form_rest(form) -}}
     </div>
 {%- endblock %}

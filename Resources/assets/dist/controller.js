@@ -103,6 +103,11 @@ var _default = /*#__PURE__*/function (_Controller) {
       });
 
       this.containerTarget.append(newEntry);
+
+      this._dispatchEvent('collection:add', {
+        index: this.index,
+        element: newEntry
+      });
     }
   }, {
     key: "delete",
@@ -144,7 +149,13 @@ var _default = /*#__PURE__*/function (_Controller) {
       var buttonDelete = this._textToNode(this.buttonDeleteValue);
 
       buttonDelete.dataset.indexEntry = index;
-      entry.append(buttonDelete);
+
+      if ('TR' === entry.nodeName) {
+        entry.lastElementChild.append(buttonDelete);
+      } else {
+        entry.append(buttonDelete);
+      }
+
       return entry;
     }
     /**
@@ -157,9 +168,11 @@ var _default = /*#__PURE__*/function (_Controller) {
   }, {
     key: "_textToNode",
     value: function _textToNode(text) {
-      var div = document.createElement('div');
-      div.innerHTML = text.trim();
-      return div.firstChild;
+      var template = document.createElement('template');
+      text = text.trim(); // Never return a text node of whitespace as the result
+
+      template.innerHTML = text;
+      return template.content.firstChild;
     }
   }, {
     key: "_dispatchEvent",

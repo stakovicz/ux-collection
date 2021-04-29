@@ -75,6 +75,11 @@ export default class extends Controller {
         });
 
         this.containerTarget.append(newEntry);
+
+        this._dispatchEvent('collection:add', {
+            index: this.index,
+            element: newEntry
+        });
     }
 
     delete(event) {
@@ -115,7 +120,12 @@ export default class extends Controller {
 
         let buttonDelete = this._textToNode(this.buttonDeleteValue);
         buttonDelete.dataset.indexEntry = index;
-        entry.append(buttonDelete);
+
+        if('TR' === entry.nodeName) {
+            entry.lastElementChild.append(buttonDelete);
+        } else {
+            entry.append(buttonDelete);
+        }
 
         return entry;
     }
@@ -128,10 +138,11 @@ export default class extends Controller {
      */
     _textToNode(text) {
 
-        let div = document.createElement('div');
-        div.innerHTML = text.trim();
+        let template = document.createElement('template');
+        text = text.trim(); // Never return a text node of whitespace as the result
+        template.innerHTML = text;
 
-        return div.firstChild;
+        return template.content.firstChild;
     }
 
     _dispatchEvent(name, payload = null, canBubble = false, cancelable = false) {
