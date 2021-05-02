@@ -1,9 +1,9 @@
 {
-    "name": "stakovicz/ux-collection",
+    "name": "symfony/ux-form-collection",
     "type": "symfony-bundle",
-    "description": "UX Collection for Symfony Forms",
+    "description": "UX Form Collection for Symfony Forms",
     "keywords": [
-        "ux-collection"
+        "ux-form-collection"
     ],
     "license": "MIT",
     "authors": [
@@ -14,7 +14,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "Stakovicz\\UXCollection\\": ""
+            "Symfony\\UX\\FormCollection\\": ""
         },
         "exclude-from-classmap": [
             "/Tests/"

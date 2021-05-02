@@ -1,6 +1,6 @@
 <?php
 
-namespace Stakovicz\UXCollection;
+namespace Symfony\UX\FormCollection;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
@@ -8,6 +8,6 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
  * @final
  * @experimental
  */
-class UXCollectionBundle extends Bundle
+class FormCollectionBundle extends Bundle
 {
 }

@@ -1,9 +1,9 @@
 <?php
 
-namespace Stakovicz\UXCollection\Form;
+namespace Symfony\UX\FormCollection\Form;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType as BaseCollectionType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -12,11 +12,11 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  * @final
  * @experimental
  */
-class UXCollectionType extends AbstractType
+class CollectionType extends AbstractType
 {
     public function getParent()
     {
-        return CollectionType::class;
+        return BaseCollectionType::class;
     }
 
     public function configureOptions(OptionsResolver $resolver)

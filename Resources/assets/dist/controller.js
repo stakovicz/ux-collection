@@ -57,9 +57,10 @@ var _default = /*#__PURE__*/function (_Controller) {
   _createClass(_default, [{
     key: "connect",
     value: function connect() {
+      console.log("OK");
       this.controllerName = this.context.scope.identifier;
 
-      this._dispatchEvent('collection:pre-connect', {
+      this._dispatchEvent('form-collection:pre-connect', {
         allowAdd: this.allowAddValue,
         allowDelete: this.allowDeleteValue
       });
@@ -81,7 +82,7 @@ var _default = /*#__PURE__*/function (_Controller) {
         }
       }
 
-      this._dispatchEvent('collection:connect', {
+      this._dispatchEvent('form-collection:connect', {
         allowAdd: this.allowAddValue,
         allowDelete: this.allowDeleteValue
       });
@@ -97,14 +98,14 @@ var _default = /*#__PURE__*/function (_Controller) {
       newEntry = this._textToNode(newEntry);
       newEntry = this._addDeleteButton(newEntry, this.index);
 
-      this._dispatchEvent('collection:pre-add', {
+      this._dispatchEvent('form-collection:pre-add', {
         index: this.index,
         element: newEntry
       });
 
       this.containerTarget.append(newEntry);
 
-      this._dispatchEvent('collection:add', {
+      this._dispatchEvent('form-collection:add', {
         index: this.index,
         element: newEntry
       });
@@ -118,14 +119,14 @@ var _default = /*#__PURE__*/function (_Controller) {
         var entry = this.entryTargets[i];
 
         if (theIndexEntryToDelete === entry.dataset.indexEntry) {
-          this._dispatchEvent('collection:pre-delete', {
+          this._dispatchEvent('form-collection:pre-delete', {
             index: entry.dataset.indexEntry,
             element: entry
           });
 
           entry.remove();
 
-          this._dispatchEvent('collection:delete', {
+          this._dispatchEvent('form-collection:delete', {
             index: entry.dataset.indexEntry,
             element: entry
           });

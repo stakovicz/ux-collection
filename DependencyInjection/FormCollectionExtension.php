@@ -1,8 +1,8 @@
 <?php
 
-namespace Stakovicz\UXCollection\DependencyInjection;
+namespace Symfony\UX\FormCollection\DependencyInjection;
 
-use Stakovicz\UXCollection\Form\UXCollectionType;
+use Symfony\UX\FormCollection\Form\CollectionType;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
@@ -11,7 +11,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 /**
  * @internal
  */
-class UXCollectionExtension extends Extension implements PrependExtensionInterface
+class FormCollectionExtension extends Extension implements PrependExtensionInterface
 {
     public function prepend(ContainerBuilder $container)
     {
@@ -20,7 +20,7 @@ class UXCollectionExtension extends Extension implements PrependExtensionInterfa
     public function load(array $configs, ContainerBuilder $container)
     {
         $container
-            ->setDefinition('form.ux_collection', new Definition(UXCollectionType::class))
+            ->setDefinition('form.ux_collection', new Definition(CollectionType::class))
             ->addTag('form.type')
             ->setPublic(false)
         ;

@@ -28,10 +28,10 @@ export default class extends Controller {
     controllerName = null;
 
     connect() {
-
+        console.log("OK");
         this.controllerName = this.context.scope.identifier;
 
-        this._dispatchEvent('collection:pre-connect', {
+        this._dispatchEvent('form-collection:pre-connect', {
             allowAdd: this.allowAddValue,
             allowDelete: this.allowDeleteValue,
         });
@@ -51,7 +51,7 @@ export default class extends Controller {
             }
         }
 
-        this._dispatchEvent('collection:connect', {
+        this._dispatchEvent('form-collection:connect', {
             allowAdd: this.allowAddValue,
             allowDelete: this.allowDeleteValue,
         });
@@ -69,14 +69,14 @@ export default class extends Controller {
         newEntry = this._textToNode(newEntry);
         newEntry = this._addDeleteButton(newEntry, this.index);
 
-        this._dispatchEvent('collection:pre-add', {
+        this._dispatchEvent('form-collection:pre-add', {
             index: this.index,
             element: newEntry
         });
 
         this.containerTarget.append(newEntry);
 
-        this._dispatchEvent('collection:add', {
+        this._dispatchEvent('form-collection:add', {
             index: this.index,
             element: newEntry
         });
@@ -91,14 +91,14 @@ export default class extends Controller {
             let entry = this.entryTargets[i];
             if (theIndexEntryToDelete === entry.dataset.indexEntry) {
 
-                this._dispatchEvent('collection:pre-delete', {
+                this._dispatchEvent('form-collection:pre-delete', {
                     index: entry.dataset.indexEntry,
                     element: entry
                 });
 
                 entry.remove();
 
-                this._dispatchEvent('collection:delete', {
+                this._dispatchEvent('form-collection:delete', {
                     index: entry.dataset.indexEntry,
                     element: entry
                 });
