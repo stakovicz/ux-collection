@@ -28,7 +28,6 @@ export default class extends Controller {
     controllerName = null;
 
     connect() {
-        console.log("OK");
         this.controllerName = this.context.scope.identifier;
 
         this._dispatchEvent('form-collection:pre-connect', {

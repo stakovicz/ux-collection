@@ -57,7 +57,6 @@ var _default = /*#__PURE__*/function (_Controller) {
   _createClass(_default, [{
     key: "connect",
     value: function connect() {
-      console.log("OK");
       this.controllerName = this.context.scope.identifier;
 
       this._dispatchEvent('form-collection:pre-connect', {
