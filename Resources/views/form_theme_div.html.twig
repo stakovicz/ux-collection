@@ -1,28 +1,26 @@
 {%- block button_add -%}
-    {%- set attrDataAction = (attr['data-action']|default('') ~ ' ' ~ controllerName ~ '#delete')|trim -%}
-
-    <button data-action="{{ controllerName }}#add"
+    {%- set attrDataAction = (attr['data-action']|default('') ~ ' ' ~ controllerName ~ '#add')|trim -%}
+    <button data-action="{{ attrDataAction }}"
             class="{{ button_add.attr.class }}"  type="button">{{ button_add.text|trans }}</button>
 {%- endblock button_add -%}
 
 {%- block button_delete -%}
     {%- set attrDataAction = (attr['data-action']|default('') ~ ' ' ~ controllerName ~ '#delete')|trim -%}
-
-    <button data-action="{{ controllerName }}#delete"
+    <button data-action="{{ attrDataAction }}"
             data-index-entry="" class="{{ button_delete.attr.class }}" type="button">
         {{ button_delete.text|trans }}</button>
 {%- endblock button_delete -%}
 
 {% block ux_collection_widget -%}
-    {%- set controllerName = 'stakovicz--ux-collection--collection' -%}
+    {%- set controllerName = 'symfony--ux-form-collection--collection' -%}
     {%- set dataController = (attr['data-controller']|default('') ~ ' ' ~ controllerName)|trim -%}
 
     {# attr for the data target on the entry of the collection #}
-    {%- set attrDataTarget = {('data-'~controllerName~'-target'): 'entry' } -%}
+    {%- set attrDataTarget = {('data-' ~ controllerName ~ '-target'): 'entry' } -%}
 
     <div data-controller="{{ dataController }}"
-        data-{{ controllerName }}-allow-add-value="{{ allow_add }}"
-        data-{{ controllerName }}-allow-delete-value="{{ allow_delete }}"
+        data-{{ controllerName }}-allow-add-value="{{ allow_add|json_encode }}"
+        data-{{ controllerName }}-allow-delete-value="{{ allow_delete|json_encode }}"
         data-{{ controllerName }}-button-add-value="{{ block('button_add')|e }}"
         data-{{ controllerName }}-button-delete-value="{{ block('button_delete')|e }}"
     >
@@ -30,7 +28,7 @@
             {%- set prototype_attr = prototype.vars.attr|merge(attrDataTarget) -%}
             {%- set attr = attr|merge({'data-prototype': form_row(prototype, {'row_attr': prototype_attr}) }) -%}
         {% endif %}
-        {%- set attr = attr|merge({('data-'~controllerName~'-target'): 'container' }) -%}
+        {%- set attr = attr|merge({('data-' ~ controllerName ~ '-target'): 'container' }) -%}
 
         <div {{ block('widget_container_attributes') }}>
             {%- if form is rootform -%}

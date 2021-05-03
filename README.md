@@ -10,7 +10,7 @@ UX Form Collection requires PHP 7.2+ and Symfony 4.4+.
 Install this bundle using Composer and Symfony Flex:
 
 ```sh
-composer require stakovicz/ux-collection
+composer require symfony/ux-form-collection
 
 # Don't forget to install the JavaScript dependencies as well and compile
 yarn install --force
@@ -25,11 +25,11 @@ You need to select the right theme from the one you are using :
 # config/packages/twig.yaml
 twig:
   # For bootstrap for example
-  form_themes: ['@UXCollection/form_theme_div.html.twig']
+  form_themes: ['@FormCollection/form_theme_div.html.twig']
 ```
 You have 2 different themes :
-- `@UXCollection/form_theme_div.html.twig`
-- `@UXCollection/form_theme_table.html.twig`
+- `@FormCollection/form_theme_div.html.twig`
+- `@FormCollection/form_theme_table.html.twig`
 
 [Check the Symfony doc](https://symfony.com/doc/4.4/form/form_themes.html) for the different ways to set themes in Symfony.
 
@@ -40,7 +40,7 @@ the native CollectionType class:
 
 ```php
 // ...
-use Stakovicz\UXCollection\Form\UXCollectionType;
+use Symfony\UX\FormCollection\Form\CollectionType;
 
 class BlogFormType extends AbstractType
 {
@@ -48,7 +48,7 @@ class BlogFormType extends AbstractType
     {
         $builder
             // ...
-            ->add('comments', UXCollectionType::class, [
+            ->add('comments', CollectionType::class, [
                 // ...
                 'button_add' => [
                      // Default text for the add button
@@ -73,7 +73,7 @@ class BlogFormType extends AbstractType
 
 ### Extend the default behavior
 
-Stakovicz UX Collection allows you to extend its default behavior using a custom Stimulus controller:
+Symfony UX Form Collection allows you to extend its default behavior using a custom Stimulus controller:
 
 ```js
 // mycollection_controller.js

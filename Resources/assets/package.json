@@ -1,6 +1,6 @@
 {
-    "name": "@stakovicz/ux-collection",
-    "description": "UX Collection for Symfony Forms",
+    "name": "@symfony/ux-form-collection",
+    "description": "UX Form Collection for Symfony Forms",
     "license": "MIT",
     "version": "0.0.4",
     "symfony": {
