@@ -30,6 +30,7 @@ export default class extends Controller {
     connect() {
         this.controllerName = this.context.scope.identifier;
 
+
         this._dispatchEvent('form-collection:pre-connect', {
             allowAdd: this.allowAddValue,
             allowDelete: this.allowDeleteValue,
@@ -64,9 +65,7 @@ export default class extends Controller {
         let newEntry = this.containerTarget.dataset.prototype;
         newEntry = newEntry.replace(/__name__label__/g, this.index);
         newEntry = newEntry.replace(/__name__/g, this.index);
-
         newEntry = this._textToNode(newEntry);
-        newEntry = this._addDeleteButton(newEntry, this.index);
 
         this._dispatchEvent('form-collection:pre-add', {
             index: this.index,
@@ -75,9 +74,13 @@ export default class extends Controller {
 
         this.containerTarget.append(newEntry);
 
+        // Retrieve the entry from targets to make sure that this is the one
+        let entry = this.entryTargets[this.entryTargets.length - 1];
+        entry = this._addDeleteButton(entry, this.index);
+
         this._dispatchEvent('form-collection:add', {
             index: this.index,
-            element: newEntry
+            element: entry
         });
     }
 
