@@ -2,7 +2,7 @@
     "name": "@symfony/ux-form-collection",
     "description": "UX Form Collection for Symfony Forms",
     "license": "MIT",
-    "version": "0.0.4",
+    "version": "1.0.0",
     "symfony": {
         "controllers": {
             "collection": {

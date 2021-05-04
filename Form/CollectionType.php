@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Symfony package.
+ *
+ * (c) Fabien Potencier <fabien@symfony.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Symfony\UX\FormCollection\Form;
 
 use Symfony\Component\Form\AbstractType;
@@ -39,10 +48,11 @@ class CollectionType extends AbstractType
 
         $view->vars['button_add'] = $options['button_add'];
         $view->vars['button_delete'] = $options['button_delete'];
+        $view->vars['prototype_name'] = $options['prototype_name'];
     }
 
     public function getBlockPrefix()
     {
-        return 'ux_collection';
+        return 'form_collection';
     }
 }

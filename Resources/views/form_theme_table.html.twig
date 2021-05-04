@@ -15,7 +15,7 @@
         {{ button_delete.text|trans }}</button>
 {%- endblock button_delete -%}
 
-{% block ux_collection_widget -%}
+{% block form_collection_widget -%}
     {%- set controllerName = 'symfony--ux-form-collection--collection' -%}
     {%- set dataController = (attr['data-controller']|default('') ~ ' ' ~ controllerName)|trim -%}
 

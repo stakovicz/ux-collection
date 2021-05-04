@@ -3,13 +3,19 @@
     "type": "symfony-bundle",
     "description": "UX Form Collection for Symfony Forms",
     "keywords": [
+        "symfony-ux",
         "ux-form-collection"
     ],
+    "homepage": "https://symfony.com",
     "license": "MIT",
     "authors": [
         {
             "name": "Stakovicz",
-            "email": "albin.kester@gmail.com"
+            "email": "stakovicz@gmail.com"
+        },
+        {
+            "name": "Symfony Community",
+            "homepage": "https://symfony.com/contributors"
         }
     ],
     "autoload": {
@@ -35,7 +41,11 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-main": "0.0.4-dev"
+            "dev-main": "1.0-dev"
+        },
+        "thanks": {
+            "name": "symfony/ux",
+            "url": "https://github.com/symfony/ux"
         }
     },
     "minimum-stability": "dev"
