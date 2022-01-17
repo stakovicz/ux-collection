@@ -10,7 +10,7 @@ UX Form Collection requires PHP 7.2+ and Symfony 4.4+.
 Install this bundle using Composer and Symfony Flex:
 
 ```sh
-composer require symfony/ux-form-collection
+composer require stakovicz/ux-collection
 
 # Don't forget to install the JavaScript dependencies as well and compile
 yarn install --force
